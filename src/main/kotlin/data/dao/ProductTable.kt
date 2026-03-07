@@ -7,4 +7,5 @@ object ProductTable: UUIDTable("products") {
     val price = double("price")
     val stock = integer("stock")
     val description = text("description").nullable()
+    val imageUrl = varchar("image_url", 255).nullable()
 }

@@ -12,4 +12,5 @@ class ProductEntity(id: EntityID<UUID>): UUIDEntity(id) {
     var price: Double by ProductTable.price
     var stock: Int by ProductTable.stock
     var description: String? by ProductTable.description
+    var imageUrl: String? by ProductTable.imageUrl
 }

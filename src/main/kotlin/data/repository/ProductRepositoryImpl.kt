@@ -24,6 +24,7 @@ class ProductRepositoryImpl(
             price = product.price
             stock = product.stock
             description = product.description
+            imageUrl = product.imageUrl
         }.toProduct()
     }
 }
