@@ -27,4 +27,24 @@ class ProductRepositoryImpl(
             imageUrl = product.imageUrl
         }.toProduct()
     }
+
+    override suspend fun updateProduct(id: String, product: Product): Product? = database.dbQuery {
+        val entity = ProductEntity.findById(UUID.fromString(id))?: return@dbQuery null
+
+        entity.name = product.name
+        entity.price = product.price
+        entity.description = product.description
+        entity.imageUrl = product.imageUrl
+        entity.stock = product.stock
+
+        entity.toProduct()
+    }
+
+    override suspend fun deleteProduct(id: String): Product? = database.dbQuery {
+        val entity = ProductEntity.findById(UUID.fromString(id))?: return@dbQuery null
+        val tempt = entity.toProduct()
+        entity.delete()
+
+        tempt
+    }
 }

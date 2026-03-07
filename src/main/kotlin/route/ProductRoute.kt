@@ -7,8 +7,10 @@ import io.ktor.server.auth.authenticate
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
+import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
+import io.ktor.server.routing.put
 import io.ktor.server.routing.route
 
 class ProductRoute(private val repository: ProductRepository) {
@@ -31,6 +33,28 @@ class ProductRoute(private val repository: ProductRepository) {
                         val product = call.receive<Product>()
                         val newProduct = repository.createProduct(product)
                         call.respond(HttpStatusCode.Created, newProduct)
+                    }
+                    put("/{id}") {
+                        val id = call.parameters["id"] ?: return@put call.respond(HttpStatusCode.BadRequest)
+                        val product = call.receive<Product>()
+
+                        val updatedProduct = repository.updateProduct(id, product)
+
+                        if (updatedProduct != null) {
+                            call.respond(HttpStatusCode.OK, updatedProduct)
+                        } else {
+                            call.respond(HttpStatusCode.NotFound, "Product not found")
+                        }
+                    }
+                    delete("/{id}") {
+                        val id = call.parameters["id"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
+                        val product = repository.deleteProduct(id)
+
+                        if (product != null) {
+                            call.respond(HttpStatusCode.OK, "${product.name} has been successfully deleted.")
+                        } else {
+                            call.respond(HttpStatusCode.NotFound, "Product not found")
+                        }
                     }
                 }
             }
