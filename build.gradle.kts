@@ -29,10 +29,16 @@ dependencies {
     implementation(libs.exposed.core)
     implementation(libs.exposed.dao)
     implementation(libs.exposed.jdbc)
+    implementation(libs.hikari.core)
     implementation(libs.postgresql)
     implementation(libs.ktor.server.netty)
     implementation(libs.logback.classic)
     implementation("io.ktor:ktor-server-config-yaml")
+
+    //flyway
+    implementation(libs.flyway.core)
+    implementation(libs.flyway.postgres)
+
     testImplementation("io.ktor:ktor-server-test-host")
     testImplementation(libs.kotlin.test.junit)
 }

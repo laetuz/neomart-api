@@ -1,6 +1,6 @@
-package id.neotica.data
+package id.neotica.data.dao
 
-import org.jetbrains.exposed.v1.core.dao.id.UUIDTable
+import org.jetbrains.exposed.v1.core.dao.id.java.UUIDTable
 
 object ProductTable: UUIDTable("products") {
     val name = varchar("name", 255)
