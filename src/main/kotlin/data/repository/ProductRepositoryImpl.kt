@@ -1,7 +1,7 @@
 package id.neotica.data.repository
 
 import id.neotica.data.NeoDatabase
-import id.neotica.data.dao.ProductEntity
+import id.neotica.data.dao.product.ProductEntity
 import id.neotica.domain.model.Product
 import id.neotica.domain.repository.ProductRepository
 import id.neotica.domain.repository.mapper.toProduct

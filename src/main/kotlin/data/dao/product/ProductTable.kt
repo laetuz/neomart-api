@@ -1,4 +1,4 @@
-package id.neotica.data.dao
+package id.neotica.data.dao.product
 
 import org.jetbrains.exposed.v1.core.dao.id.java.UUIDTable
 

@@ -1,6 +1,6 @@
 package id.neotica.domain.repository.mapper
 
-import id.neotica.data.dao.ProductEntity
+import id.neotica.data.dao.product.ProductEntity
 import id.neotica.domain.model.Product
 
 fun ProductEntity.toProduct(): Product = Product(
