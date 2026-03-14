@@ -1,5 +1,6 @@
 package id.neotica
 
+import id.neotica.route.CartRoute
 import id.neotica.route.ProductRoute
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -11,6 +12,8 @@ import org.koin.ktor.ext.inject
 
 fun Application.configureRouting() {
     val productRoutes by inject<ProductRoute>()
+    val cartRoutes by inject<CartRoute>()
+
     install(StatusPages) {
         exception<Throwable> { call, cause ->
             call.respondText(text = "500: $cause", status = HttpStatusCode.InternalServerError)
@@ -20,5 +23,6 @@ fun Application.configureRouting() {
     routing {
         get { call.respond(HttpStatusCode.OK, "Neomart") }
         productRoutes.invoke(this)
+        cartRoutes(this)
     }
 }

@@ -2,6 +2,7 @@ package id.neotica.route
 
 import id.neotica.domain.model.Product
 import id.neotica.domain.repository.ProductRepository
+import id.neotica.utils.Constants.AUTH_JWT
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.auth.authenticate
 import io.ktor.server.request.receive
@@ -26,35 +27,34 @@ class ProductRoute(private val repository: ProductRepository) {
                 val product = repository.getProductById(id) ?: return@get call.respond(HttpStatusCode.NotFound)
                 call.respond(product)
             }
+        }
+        route.authenticate(AUTH_JWT) {
+            route("/admin/products") {
+                post {
+                    val product = call.receive<Product>()
+                    val newProduct = repository.createProduct(product)
+                    call.respond(HttpStatusCode.Created, newProduct)
+                }
+                put("/{id}") {
+                    val id = call.parameters["id"] ?: return@put call.respond(HttpStatusCode.BadRequest)
+                    val product = call.receive<Product>()
 
-            route.authenticate("auth-jwt") {
-                route.route("/admin/product") {
-                    post {
-                        val product = call.receive<Product>()
-                        val newProduct = repository.createProduct(product)
-                        call.respond(HttpStatusCode.Created, newProduct)
+                    val updatedProduct = repository.updateProduct(id, product)
+
+                    if (updatedProduct != null) {
+                        call.respond(HttpStatusCode.OK, updatedProduct)
+                    } else {
+                        call.respond(HttpStatusCode.NotFound, "Product not found")
                     }
-                    put("/{id}") {
-                        val id = call.parameters["id"] ?: return@put call.respond(HttpStatusCode.BadRequest)
-                        val product = call.receive<Product>()
+                }
+                delete("/{id}") {
+                    val id = call.parameters["id"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
+                    val product = repository.deleteProduct(id)
 
-                        val updatedProduct = repository.updateProduct(id, product)
-
-                        if (updatedProduct != null) {
-                            call.respond(HttpStatusCode.OK, updatedProduct)
-                        } else {
-                            call.respond(HttpStatusCode.NotFound, "Product not found")
-                        }
-                    }
-                    delete("/{id}") {
-                        val id = call.parameters["id"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
-                        val product = repository.deleteProduct(id)
-
-                        if (product != null) {
-                            call.respond(HttpStatusCode.OK, "${product.name} has been successfully deleted.")
-                        } else {
-                            call.respond(HttpStatusCode.NotFound, "Product not found")
-                        }
+                    if (product != null) {
+                        call.respond(HttpStatusCode.OK, "${product.name} has been successfully deleted.")
+                    } else {
+                        call.respond(HttpStatusCode.NotFound, "Product not found")
                     }
                 }
             }

@@ -6,6 +6,7 @@ import id.neotica.data.repository.CartRepositoryImpl
 import id.neotica.data.repository.ProductRepositoryImpl
 import id.neotica.domain.repository.CartRepository
 import id.neotica.domain.repository.ProductRepository
+import id.neotica.route.CartRoute
 import id.neotica.route.ProductRoute
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -18,4 +19,5 @@ val neomartModule = module {
     singleOf(::CartRepositoryImpl).bind(CartRepository::class)
 
     singleOf(::ProductRoute)
+    singleOf(::CartRoute)
 }

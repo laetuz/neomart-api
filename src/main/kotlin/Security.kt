@@ -2,6 +2,7 @@ package id.neotica
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
+import id.neotica.utils.Constants.AUTH_JWT
 import id.neotica.utils.Constants.baseUrl
 import id.neotica.utils.Utils
 import io.ktor.http.auth.HttpAuthHeader
@@ -11,7 +12,7 @@ import io.ktor.server.auth.jwt.*
 
 fun Application.configureSecurity() {
     authentication {
-        jwt("auth-jwt") {
+        jwt(AUTH_JWT) {
             realm = "access auth-jwt"
             authHeader { call ->
                 call.request.parseAuthorizationHeader()
