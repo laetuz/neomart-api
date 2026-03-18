@@ -42,3 +42,9 @@ dependencies {
     testImplementation("io.ktor:ktor-server-test-host")
     testImplementation(libs.kotlin.test.junit)
 }
+
+tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+    archiveBaseName.set("shadow")
+    archiveClassifier.set("")
+    archiveVersion.set("")
+}
