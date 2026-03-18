@@ -15,4 +15,5 @@ class CartEntity(id: EntityID<UUID>): UUIDEntity(id) {
     var userId: Uuid by CartTable.userId
     var product: ProductEntity by ProductEntity referencedOn CartTable.productId
     var quantity: Int by CartTable.quantity
+    var createdAt: Long by CartTable.createdAt
 }

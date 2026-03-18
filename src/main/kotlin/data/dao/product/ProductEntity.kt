@@ -13,4 +13,5 @@ class ProductEntity(id: EntityID<UUID>): UUIDEntity(id) {
     var stock: Int by ProductTable.stock
     var description: String? by ProductTable.description
     var imageUrl: String? by ProductTable.imageUrl
+    var createdAt: Long by ProductTable.createdAt
 }

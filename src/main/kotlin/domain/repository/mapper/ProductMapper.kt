@@ -9,5 +9,6 @@ fun ProductEntity.toProduct(): Product = Product(
     price = this.price,
     stock = this.stock,
     description = this.description,
-    imageUrl = this.imageUrl
+    imageUrl = this.imageUrl,
+    createdAt = this.createdAt,
 )

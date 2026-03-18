@@ -8,4 +8,5 @@ object ProductTable: UUIDTable("products") {
     val stock = integer("stock")
     val description = text("description").nullable()
     val imageUrl = varchar("image_url", 255).nullable()
+    val createdAt = long("created_at").clientDefault { System.currentTimeMillis() }
 }

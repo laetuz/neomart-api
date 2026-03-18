@@ -11,7 +11,9 @@ class ProductRepositoryImpl(
     private val database: NeoDatabase,
 ): ProductRepository {
     override suspend fun getAllProducts(): List<Product> = database.dbQuery {
-        ProductEntity.all().map { it.toProduct() }
+        ProductEntity.all()
+            .sortedBy { it.createdAt }
+            .map { it.toProduct() }
     }
 
     override suspend fun getProductById(id: String): Product? = database.dbQuery {

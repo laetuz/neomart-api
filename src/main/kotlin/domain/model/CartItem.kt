@@ -1,5 +1,6 @@
 package id.neotica.domain.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -10,5 +11,7 @@ data class CartItem(
     val price: Double,
     val quantity: Int,
     val imageUrl: String?,
-    val subtotal: Double
+    val subtotal: Double,
+    @SerialName("created_at")
+    val createdAt: Long? = null,
 )

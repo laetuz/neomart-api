@@ -10,5 +10,6 @@ fun CartEntity.toCartItem(): CartItem = CartItem(
     price = this.product.price,
     quantity = this.quantity,
     imageUrl = this.product.imageUrl,
+    createdAt = this.createdAt,
     subtotal = this.product.price * this.quantity,
 )

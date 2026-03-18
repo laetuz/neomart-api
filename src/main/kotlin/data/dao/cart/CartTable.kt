@@ -10,4 +10,5 @@ object CartTable: UUIDTable(name = "carts") {
     val userId = uuid("user_id")
     val productId = reference("product_id", ProductTable, onDelete = ReferenceOption.CASCADE)
     val quantity = integer("quantity").default(1)
+    val createdAt = long("created_at").clientDefault { System.currentTimeMillis() }
 }
