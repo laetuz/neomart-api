@@ -3,10 +3,13 @@ package id.neotica.di
 import id.neotica.data.DatabaseImpl
 import id.neotica.data.NeoDatabase
 import id.neotica.data.repository.CartRepositoryImpl
+import id.neotica.data.repository.OrderRepositoryImpl
 import id.neotica.data.repository.ProductRepositoryImpl
 import id.neotica.domain.repository.CartRepository
+import id.neotica.domain.repository.OrderRepository
 import id.neotica.domain.repository.ProductRepository
 import id.neotica.route.CartRoute
+import id.neotica.route.OrderRoute
 import id.neotica.route.ProductRoute
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -17,7 +20,9 @@ val neomartModule = module {
 
     singleOf(::ProductRepositoryImpl).bind(ProductRepository::class)
     singleOf(::CartRepositoryImpl).bind(CartRepository::class)
+    singleOf(::OrderRepositoryImpl).bind(OrderRepository::class)
 
     singleOf(::ProductRoute)
     singleOf(::CartRoute)
+    singleOf(::OrderRoute)
 }
