@@ -1,4 +1,4 @@
-package id.neotica
+package id.neotica.application
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm

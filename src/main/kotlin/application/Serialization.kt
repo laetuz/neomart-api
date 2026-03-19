@@ -1,4 +1,4 @@
-package id.neotica
+package id.neotica.application
 
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*

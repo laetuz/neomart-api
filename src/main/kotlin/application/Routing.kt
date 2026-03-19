@@ -1,4 +1,4 @@
-package id.neotica
+package id.neotica.application
 
 import id.neotica.route.CartRoute
 import id.neotica.route.OrderRoute

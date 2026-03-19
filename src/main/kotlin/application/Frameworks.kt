@@ -1,4 +1,4 @@
-package id.neotica
+package id.neotica.application
 
 import id.neotica.di.neomartModule
 import io.ktor.server.application.*
