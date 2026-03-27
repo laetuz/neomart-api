@@ -5,15 +5,18 @@ import id.neotica.data.dao.product.ProductEntity
 import id.neotica.domain.model.Product
 import id.neotica.domain.repository.ProductRepository
 import id.neotica.domain.repository.mapper.toProduct
+import id.neotica.utils.PaginatedResponse
+import id.neotica.utils.PaginationParams
+import id.neotica.utils.paginate
 import java.util.UUID
 
 class ProductRepositoryImpl(
     private val database: NeoDatabase,
 ): ProductRepository {
-    override suspend fun getAllProducts(): List<Product> = database.dbQuery {
-        ProductEntity.all()
-            .sortedBy { it.createdAt }
-            .map { it.toProduct() }
+    override suspend fun getAllProducts(params: PaginationParams): PaginatedResponse<Product> = database.dbQuery {
+        ProductEntity.all().paginate(params) {
+            it.toProduct()
+        }
     }
 
     override suspend fun getProductById(id: String): Product? = database.dbQuery {

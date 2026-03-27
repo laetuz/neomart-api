@@ -3,6 +3,7 @@ package id.neotica.route
 import id.neotica.domain.model.Product
 import id.neotica.domain.repository.ProductRepository
 import id.neotica.utils.Constants.AUTH_JWT
+import id.neotica.utils.getPaginationParams
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.auth.authenticate
 import io.ktor.server.request.receive
@@ -18,7 +19,8 @@ class ProductRoute(private val repository: ProductRepository) {
     operator fun invoke(route: Route) {
         route.route("/products") {
             get {
-                val products = repository.getAllProducts()
+                val pagination = call.getPaginationParams()
+                val products = repository.getAllProducts(pagination)
                 call.respond(HttpStatusCode.OK, products)
             }
             get("/{id}") {
